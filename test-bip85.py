@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pytest
 from bip85lib.bip85 import Bip85
 import wallycore as wally

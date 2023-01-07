@@ -1,3 +1,13 @@
+pytest
+#tkinter
+tk
+pyside2
+WxPython
+Remi
 colorama==0.4.5
 termcolor==1.1.0
 wallycore==0.8.5
+setuptools
+PySimpleGUI==4.60.4
+psgdemos
+bip85-cli

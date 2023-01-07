@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.DS_Store
+__pycache__/
+get-pip.py
+readme_creator/psg_gui.py

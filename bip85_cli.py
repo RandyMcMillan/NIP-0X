@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from bip85lib.bip85 import Bip85
 
@@ -30,13 +31,13 @@ def main():
     if args.mnemonic is not None:
         bip85.import_mnemonic(args.mnemonic)
         found = True
-        print(colored('Original seed: {}'.format(bip85.seed.hex()), 'red'))
-        print(colored('Original master key: {}'.format(bip85.get_priv_base58()), 'red'))
+        print(colored('Original seed:\n{}'.format(bip85.seed.hex()), 'red'))
+        print(colored('Original master key:\n{}'.format(bip85.get_priv_base58()), 'red'))
 
     if args.master_key is not None:
         bip85.import_xprv(args.master_key)
         found = True
-        print(colored('Imported  master key: {}'.format(bip85.get_priv_base58()), 'red'))
+        print(colored('Imported  master key:\n{}'.format(bip85.get_priv_base58()), 'red'))
 
     if not found:
         print(colored('Missing mnemonic or master_key.', 'red'))
