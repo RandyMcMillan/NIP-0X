@@ -24,8 +24,8 @@ def hash_string(string):
     """
     Return a SHA-256 hash of the given string
     """
-    print(string[0])
-    print(string[1])
+    #print(string[0])
+    #print(string[1])
     #print(string[2])
     print(len(string))
     if len(string) == 0:
@@ -61,8 +61,8 @@ if __name__ == '__main__':
         main_gui()
         exit()
     if len(sys.argv) == 2:
-        print(sys.argv[0])
-        print(sys.argv[1])
+        #print(sys.argv[0])
+        #print(sys.argv[1])
         print(hashlib.sha256(str(sys.argv[1]).encode('utf-8')).hexdigest())
         exit()
     if len(sys.argv) == 3:
