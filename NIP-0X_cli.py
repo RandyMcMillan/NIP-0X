@@ -26,7 +26,7 @@ def hash_string(string):
     """
     print(string[0])
     print(string[1])
-    print(string[2])
+    #print(string[2])
     print(len(string))
     if len(string) == 0:
         return hashlib.sha256().hexdigest()
@@ -58,13 +58,12 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         #print(len(sys.argv))
         #print(sys.argv[0])
-        main_gui(sys.argv)
+        main_gui()
         exit()
     if len(sys.argv) == 2:
         print(sys.argv[0])
         print(sys.argv[1])
-        #print(hashlib.sha256().hexdigest())
-        main_cli(sys.argv)
+        print(hashlib.sha256(str(sys.argv[1]).encode('utf-8')).hexdigest())
         exit()
     if len(sys.argv) == 3:
         print(sys.argv[0])
