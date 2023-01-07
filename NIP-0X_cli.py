@@ -27,7 +27,7 @@ def hash_string(string):
     #print(string[0])
     #print(string[1])
     #print(string[2])
-    print(len(string))
+    #print(len(string))
     if len(string) == 0:
         return hashlib.sha256().hexdigest()
     if len(string) == 1:
@@ -45,13 +45,12 @@ def main_cli(string):
 
 def main_gui():
 
-    window = sg.Window('Window Title', layout)
-
+    window = sg.Window('NIP-0X', layout)
     event, values = window.read()
-
     main_cli(values)
-
     window.close()
+    exit()
+    # end main_gui
 
 if __name__ == '__main__':
     values = []
@@ -59,7 +58,6 @@ if __name__ == '__main__':
         #print(len(sys.argv))
         #print(sys.argv[0])
         main_gui()
-        exit()
     if len(sys.argv) == 2:
         #print(sys.argv[0])
         #print(sys.argv[1])
