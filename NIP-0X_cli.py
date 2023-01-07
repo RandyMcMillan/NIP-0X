@@ -1,33 +1,84 @@
-#!/usr/bin/env python3.10
-import pip
-import sys, re, os, platform, shutil, stat, subprocess, os.path
+#!/usr/bin/env python3
+#apt-get/brew install python-tk OR python3-tk
+#OR
+#make init
+import sys
+import cryptography as cr
+import hashlib
+import PySimpleGUI  as sg
 
-while True:
+# Define the window's contents
+layout = [
+            [sg.Text("What is the string to be hashed?")],
+            [sg.Input()],
+            [sg.Text("What is the salting to be hashed?")],
+            [sg.Input()],
+            [sg.Text("What is the index to be hashed?")],
+            [sg.Input()],
+            [sg.Button('Ok')] ]
 
-    print('True')
-    try:
-        print('try')
-        #import your modules here. !
-        from argparse import ArgumentParser
-        from ds_store import DSStore
-        from mac_alias import Alias
-        from pathlib import Path
-        from subprocess import PIPE, run
-        from typing import List, Optional
-        from PySimpleGUI import *
-        from PySimpleGUI_Events import *
-        from tk import *
-        from cryptography import *
+def help():
+    print('python3 NIP-0x.py <string>')
 
-        os.system('pip3 install cryptography')
-        print('break')
-        break
-
-    except ImportError as err_mdl:
-
-        #print((err_mdl.name))
-        pip.main(['install', err_mdl.name])
+def hash_string(string):
+    """
+    Return a SHA-256 hash of the given string
+    """
+    print(string[0])
+    print(string[1])
+    print(string[2])
+    print(len(string))
+    if len(string) == 0:
+        return hashlib.sha256().hexdigest()
+    if len(string) == 1:
+        return hashlib.sha256(string[0].encode('utf-8')).hexdigest()
+    if len(string) == 2:
+        return hashlib.sha256(string[0].encode('utf-8') + string[1].encode('utf-8')).hexdigest()
+    if len(string) == 3:
+        return hashlib.sha256(string[0].encode('utf-8')).hexdigest()
     else:
-        os.system('pip3 install -r requirements.txt')
-        os.system('pip3 install .')
+        help()
 
+def main_cli(string):
+    # Do something with the information gathered
+    print('', hash_string(string))
+
+def main_gui():
+
+    window = sg.Window('Window Title', layout)
+
+    event, values = window.read()
+
+    main_cli(values)
+
+    window.close()
+
+if __name__ == '__main__':
+    values = []
+    if len(sys.argv) < 2:
+        #print(len(sys.argv))
+        #print(sys.argv[0])
+        main_gui(sys.argv)
+        exit()
+    if len(sys.argv) == 2:
+        print(sys.argv[0])
+        print(sys.argv[1])
+        #print(hashlib.sha256().hexdigest())
+        main_cli(sys.argv)
+        exit()
+    if len(sys.argv) == 3:
+        print(sys.argv[0])
+        print(sys.argv[1])
+        print(sys.argv[2])
+        main_cli(sys.argv)
+        exit()
+    if len(sys.argv) == 4:
+        print(sys.argv[0])
+        print(sys.argv[1])
+        print(sys.argv[2])
+        print(sys.argv[3])
+        main_cli(sys.argv)
+        exit()
+    else:
+        help()
+        exit()
