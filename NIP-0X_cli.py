@@ -165,6 +165,7 @@ args = parser.parse_args()
 #print(f"test {args.integers}",args.accumulate(args.integers))
 #print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
 args = parser.parse_args()
+print(vars(args))
 
 if __name__ == '__main__':
     print(len(sys.argv))
