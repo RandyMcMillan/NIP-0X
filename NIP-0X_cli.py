@@ -3,6 +3,19 @@ import sys
 import cryptography as cr
 import hashlib
 import PySimpleGUI  as sg
+import pyqrcode
+#import png
+from PIL import Image
+
+
+
+def show_qr(hash_base_pw_idx):
+    s = hash_base_pw_idx
+    url = pyqrcode.create(s)
+    img = s[0:14]
+    url.png(img, scale=10)
+    im=Image.open(img)
+    im.show()
 
 tab1_layout = [
 #             [sg.Text('Key Generator')],
@@ -44,9 +57,6 @@ window = sg.Window('NIP-0X', layout)
 # Display and interact with the Window using an Event Loop
 while True:
     event, values = window.Read()
-    # See if user wants to quit or window was closed
-    if event == sg.WINDOW_CLOSED or event == 'Quit':
-        break
     hashed_base = hashlib.sha256( \
     str(values['-INPUT1-']).encode('utf-8')).hexdigest()
     # window['-OUTPUT1-'].update('base_entropy:' + values['-INPUT1-'] + "")
@@ -62,6 +72,10 @@ while True:
     +str(values['-INPUT2-']).encode('utf-8') \
     +str(values['-INPUT3-']).encode('utf-8')).hexdigest()
     window['-BASEPWIDXOUTPUT-'].update(hashed_base_pw_idx)
+    # See if user wants to quit or window was closed
+    if event == sg.WINDOW_CLOSED or event == 'Quit':
+        show_qr(hashed_base_pw_idx)
+        break
 
 # Finish up by removing from the screen
 window.close()
