@@ -141,6 +141,7 @@ parser = argparse.ArgumentParser(
                     prog = 'NIP-0x_cli',
                     description = 'nostr python3 cli',
                     epilog = 'NOSTR is AWESOME!')
+subparsers = parser.add_subparsers()
 #parser.add_argument('integers', metavar='N', type=int, nargs='+',
 #                    help='an integer for the accumulator')
 #parser.add_argument('--sum', dest='accumulate', action='store_const',
