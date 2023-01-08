@@ -22,7 +22,13 @@ def show_qr(hash_base_pw_idx, window):
     im.show()
     # end show_qr
 
-def ShowMeTheButtons():
+def ShowMeTheButtons(base_entropy):
+
+    if len(base_entropy) > 0:
+        print(base_entropy)
+    else:
+        base_entropy = ""
+
     # ------ Menu Definition ------ #
     menu_def = [['&File', ['&Open', '&Save', '&Properties', 'E&xit']],
                 ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
@@ -119,5 +125,47 @@ def ShowMeTheButtons():
     # Finish up by removing from the screen
     window.close()
 
+def main_cli(command):
+    print('main_cli')
+    print(f'main_cli: command={command}')
+    #end main_cli
+
+
+def main_gui(argv):
+    # filename = sg.popup_get_file('Please enter a filename:')
+#    main_cli(argv)
+    ShowMeTheButtons(argv)
+    #end main_gui
+
+parser = argparse.ArgumentParser(
+                    prog = 'NIP-0x_cli',
+                    description = 'nostr python3 cli',
+                    epilog = 'NOSTR is AWESOME!')
+#parser.add_argument('integers', metavar='N', type=int, nargs='+',
+#                    help='an integer for the accumulator')
+#parser.add_argument('--sum', dest='accumulate', action='store_const',
+#                    const=sum, default=max,
+#                    help='sum the integers (default: find the max)')
+#parser.add_argument('--sum2', dest='accumulate2', action='store_const',
+#                    const=sum, default=max,
+#                    help='sum2 the integers (default: find the max)')
+parser.add_argument('-b','--base', dest='base_entropy',
+                    default='', help='Your source of entropy (text string)')
+                    # end parser
+args = parser.parse_args()
+#print(f"test {args.integers}",args.accumulate(args.integers))
+#print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
+args = parser.parse_args()
+
 if __name__ == '__main__':
-    ShowMeTheButtons()
+    print(len(sys.argv))
+    if len(sys.argv) < 2:
+        main_gui('')
+        # end < 2
+    if len(sys.argv) >= 2 and len(sys.argv) < 5:
+        main_gui(sys.argv)
+        # end >= 2
+    else:
+        main_cli(sys.argv)
+else:
+    main_cli(sys.argv)
