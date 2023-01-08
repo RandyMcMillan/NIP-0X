@@ -72,10 +72,10 @@ def ShowMeTheButtons():
     # The window layout - defines the entire window
     layout = [
              [sg.Menu(menu_def, )],
-             [sg.Frame('', toolbar_buttons, title_color='white', background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(0, 0))],
-             [sg.Text('', size=(20, 8))],
-#             [sg.Text('Status Bar', relief=sg.RELIEF_SUNKEN, size=(55, 1), pad=(0, 3), key='-status-')]
-             [sg.TabGroup(tab_group_layout, enable_events=True, key='-TABGROUP-')]
+             [sg.Frame('', toolbar_buttons, title_color='white', background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
+#             [sg.Text('', size=(100, 0))],
+             [sg.TabGroup(tab_group_layout, enable_events=True, key='-TABGROUP-')],
+             [sg.Text('Status Bar', relief=sg.RELIEF_SUNKEN, size=(100, 1), pad=(3, 3), key='-status-')]
              ]
 
     # Create the window
