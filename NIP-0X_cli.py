@@ -149,8 +149,11 @@ parser = argparse.ArgumentParser(
 #parser.add_argument('--sum2', dest='accumulate2', action='store_const',
 #                    const=sum, default=max,
 #                    help='sum2 the integers (default: find the max)')
-parser.add_argument('-b','--base', dest='base_entropy',
-                    default='', help='Your source of entropy (text string)')
+parser.add_argument('-b','--base', dest='base_entropy', type=str,
+                    default='', help='Your source of entropy type=str BASE_ENTROPY')
+                    # end parser
+parser.add_argument('-pw','--password', dest='password', type=str,
+                    default='', help='Addtional entropy type=str (BASE_ENTROPY+PASSWORD)')
                     # end parser
 args = parser.parse_args()
 #print(f"test {args.integers}",args.accumulate(args.integers))
