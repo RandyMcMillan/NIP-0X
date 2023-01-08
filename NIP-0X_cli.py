@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import argparse
 import cryptography as cr
 import hashlib
 import PySimpleGUI  as sg
