@@ -13,24 +13,64 @@ layout = [
           [sg.Text("index")],
           [sg.Input(key='-INPUT3-')],
 
-          [sg.Text(size=(64,1), key='-BASE-')],
-          [sg.Text(size=(64,1), key='-BASEOUTPUT-')],
+          [sg.Text('', size=(64,1), key='-BASE-')],
+          [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
 
-          [sg.Text(size=(64,1), key='-BASEPW-')],
-          [sg.Text(size=(64,1), key='-BASEPWOUTPUT-')],
+          [sg.Text('', size=(64,1), key='-BASEPW-')],
+          [sg.Text('', size=(64,1), key='-BASEPWOUTPUT-')],
 
-          [sg.Text(size=(64,1), key='-BASEPWIDX-')],
-          [sg.Text(size=(64,1), key='-BASEPWIDXOUTPUT-')],
+          [sg.Text('', size=(64,1), key='-BASEPWIDX-')],
+          [sg.Text('', size=(64,1), key='-BASEPWIDXOUTPUT-')],
 
           [sg.Button('Ok'), sg.Button('Quit')]
           ]
+
+tab1_layout = [[sg.Text('Tab 1')],
+               [sg.Text('Put your layout in here')],
+               [sg.Text('Input something'), sg.Input(size=(12,1), key='-IN-TAB1-')]]
+
+tab2_layout = [[sg.Text('Tab 2')]]
+tab3_layout = [[sg.Text('Tab 3')]]
+tab4_layout = [[sg.Text('Tab 3')]]
+
+# The TabgGroup layout - it must contain only Tabs
+tab_group_layout = [[sg.Tab('Tab 1', tab1_layout, key='-TAB1-'),
+                     sg.Tab('Tab 2', tab2_layout, visible=False, key='-TAB2-'),
+                     sg.Tab('Tab 3', tab3_layout, key='-TAB3-'),
+                     sg.Tab('Tab 4', tab4_layout, visible=False, key='-TAB4-')]]
+
+# The window layout - defines the entire window
+layout = [[sg.TabGroup(tab_group_layout,
+                       enable_events=True,
+                       key='-TABGROUP-')],
+          # [sg.Text('Make tab number'), sg.Input(key='-IN-', size=(3,1)), sg.Button('Invisible'), sg.Button('Visible'), sg.Button('Select'), sg.Button('Disable')]]
+          [sg.Text("base_entropy")],
+          [sg.Input(key='-INPUT1-')],
+          [sg.Text("password_salt")],
+          [sg.Input(key='-INPUT2-')],
+          [sg.Text("index")],
+          [sg.Input(key='-INPUT3-')],
+
+          [sg.Text('', size=(64,1), key='-BASE-')],
+          [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
+
+          [sg.Text('', size=(64,1), key='-BASEPW-')],
+          [sg.Text('', size=(64,1), key='-BASEPWOUTPUT-')],
+
+          [sg.Text('', size=(64,1), key='-BASEPWIDX-')],
+          [sg.Text('', size=(64,1), key='-BASEPWIDXOUTPUT-')],
+
+          [sg.Button('Ok'), sg.Button('Quit')]
+          ]
+
+
 
 # Create the window
 window = sg.Window('NIP-0X', layout)
 
 # Display and interact with the Window using an Event Loop
 while True:
-    event, values = window.read()
+    event, values = window.Read()
     # See if user wants to quit or window was closed
     if event == sg.WINDOW_CLOSED or event == 'Quit':
         break
