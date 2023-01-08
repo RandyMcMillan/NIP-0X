@@ -1,0 +1,3 @@
+[submodule "p2p"]
+	path = p2p
+	url = git@github.com:0x20bf-org/p2p.git

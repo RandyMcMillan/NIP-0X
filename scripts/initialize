@@ -59,9 +59,9 @@ if hash apt-get 2>/dev/null; then
 	python-tk python3-tk
     if ! hash pip3 2>/dev/null; then
 	sudo apt-get install python3-pip
-    pip3 install +PySimpleGUI==4.60.4
+    pip3 install PySimpleGUI
     else
-        pip3 install +PySimpleGUI==4.60.4
+        pip3 install PySimpleGUI
     fi
 exit
 fi
@@ -74,13 +74,13 @@ if hash brew 2>/dev/null; then
     fi
     brew install --quiet  --force python@3
     if   hash pip3 2>/dev/null; then
-		pip3 install +PySimpleGUI==4.60.4
+		pip3 install PySimpleGUI
     else
-		python3 -m pip install +PySimpleGUI==4.60.4
+		python3 -m pip install PySimpleGUI
     fi
 
 	PYTHON3=$(command -v python3)
-	$PYTHON3 -m pip -q install --upgrade pip
+	$PYTHON3 -m pip -q install --upgrade pip || echo
     echo
 else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

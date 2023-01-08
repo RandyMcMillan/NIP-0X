@@ -271,12 +271,16 @@ init:initialize## 	basic setup
 	git config --global --add safe.directory $(PWD)
 	chown -R $(shell id -u) *                 || echo
 
-	$(PYTHON3) -m pip install --upgrade pip 2>/dev/null
-	$(PYTHON3) -m pip install -q -r requirements.txt 2>/dev/null
-	pushd scripts > /dev/null; for string in *; do sudo chmod -R o+rwx /usr/local/bin/$$string; done; popd  2>/dev/null || echo
+	# $(PYTHON3) -m pip install ./p2p 2>/dev/null
+	#$(PYTHON3) -m pip install --upgrade pip 2>/dev/null
+	#$(PYTHON3) -m pip install -q -r requirements.txt 2>/dev/null
+	# pushd scripts > /dev/null; for string in *; do sudo chmod -R o+rwx /usr/local/bin/$$string; done; popd  2>/dev/null || echo
 
 install:## 	install from local repo
 	$(PIP3) install .
+.PHONY:p2p
+p2p:## 	install from local repo
+	$(PYTHON3) ./p2p/setup.py install
 
 .PHONY: initialize
 initialize:## 	install libs and dependencies

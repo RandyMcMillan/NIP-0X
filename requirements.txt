@@ -8,6 +8,7 @@ colorama==0.4.5
 termcolor==1.1.0
 wallycore==0.8.5
 setuptools
-PySimpleGUI==4.60.4
+PySimpleGUI==3.39.0
 psgdemos
+cryptography
 bip85-cli
