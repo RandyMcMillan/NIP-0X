@@ -18,7 +18,7 @@ layout = [
           ]
 
 # Create the window
-window = sg.Window('Window Title', layout)
+window = sg.Window('NIP-0X', layout)
 
 # Display and interact with the Window using an Event Loop
 while True:
