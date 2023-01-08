@@ -158,6 +158,9 @@ parser.add_argument('-pw','--password', dest='password', type=str,
 parser.add_argument('-i','--index', dest='index', type=int,
                     default='0', help='Deterministic entropy type=int (BASE_ENTROPY+PASSWORD+INDEX)')
                     # end parser
+parser.add_argument('-g','--gui', dest='gui', action='store_true',
+                    default=False, help='Present GUI ')
+                    # end parser
 args = parser.parse_args()
 #print(f"test {args.integers}",args.accumulate(args.integers))
 #print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
