@@ -1,4 +1,6 @@
 pytest
+pyqrcode
+pypng
 #tkinter
 tk
 pyside2
