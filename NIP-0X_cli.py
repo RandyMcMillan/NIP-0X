@@ -6,18 +6,20 @@ import PySimpleGUI  as sg
 
 tab1_layout = [
 #             [sg.Text('Key Generator')],
+
               [sg.Text("base entropy")],
-              [sg.Input(key='-INPUT1-')],
-              [sg.Text("password | additional entropy")],
-              [sg.Input(key='-INPUT2-')],
-              [sg.Text("index (secret integer)")],
-              [sg.Input(key='-INPUT3-')],
-              [sg.Text('', size=(64,1), key='-BASE-')],
-              [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
-              [sg.Text('', size=(64,1), key='-BASEPW-')],
-              [sg.Text('', size=(64,1), key='-BASEPWOUTPUT-')],
-              [sg.Text('', size=(64,1), key='-BASEPWIDX-')],
-              [sg.Text('', size=(64,1), key='-BASEPWIDXOUTPUT-')],
+              [sg.Input( size=(100,1),key='-INPUT1-')],
+              [sg.Text("password • additional entropy")],
+              [sg.Input( size=(100,1),key='-INPUT2-')],
+              [sg.Text("index (secret integer • hashed as a string)")],
+              [sg.Input( size=(100,1),key='-INPUT3-')],
+
+              # [sg.Text('', size=(100,1), key='-BASE-')],
+              [sg.Text('', size=(100,1), key='-BASEOUTPUT-')],
+              # [sg.Text('', size=(100,1), key='-BASEPW-')],
+              [sg.Text('', size=(100,1), key='-BASEPWOUTPUT-')],
+              # [sg.Text('', size=(100,1), key='-BASEPWIDX-')],
+              [sg.Text('', size=(100,1), key='-BASEPWIDXOUTPUT-')],
               [sg.Button('Ok'), sg.Button('Quit')]
               ]
 
