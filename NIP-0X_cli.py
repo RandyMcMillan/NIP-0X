@@ -4,23 +4,22 @@ import cryptography as cr
 import hashlib
 import PySimpleGUI  as sg
 
-tab1_layout = [[sg.Text('Tab 1')],
-
-               [sg.Text('Put your layout in here')],
-                        [sg.Text("base_entropy")],
-                        [sg.Input(key='-INPUT1-')],
-                        [sg.Text("password_salt")],
-                        [sg.Input(key='-INPUT2-')],
-                        [sg.Text("index")],
-                        [sg.Input(key='-INPUT3-')],
-                        [sg.Text('', size=(64,1), key='-BASE-')],
-                        [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
-                        [sg.Text('', size=(64,1), key='-BASEPW-')],
-                        [sg.Text('', size=(64,1), key='-BASEPWOUTPUT-')],
-                        [sg.Text('', size=(64,1), key='-BASEPWIDX-')],
-                        [sg.Text('', size=(64,1), key='-BASEPWIDXOUTPUT-')],
-                        [sg.Button('Ok'), sg.Button('Quit')]]
-#                        [sg.Text('Input something'), sg.Input(size=(12,1), key='-IN-TAB1-')]]
+tab1_layout = [
+#             [sg.Text('Key Generator')],
+              [sg.Text("base_entropy")],
+              [sg.Input(key='-INPUT1-')],
+              [sg.Text("password_salt")],
+              [sg.Input(key='-INPUT2-')],
+              [sg.Text("index")],
+              [sg.Input(key='-INPUT3-')],
+              [sg.Text('', size=(64,1), key='-BASE-')],
+              [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
+              [sg.Text('', size=(64,1), key='-BASEPW-')],
+              [sg.Text('', size=(64,1), key='-BASEPWOUTPUT-')],
+              [sg.Text('', size=(64,1), key='-BASEPWIDX-')],
+              [sg.Text('', size=(64,1), key='-BASEPWIDXOUTPUT-')],
+              [sg.Button('Ok'), sg.Button('Quit')]
+              ]
 
 
 tab2_layout = [[sg.Text('Tab 2')]]
@@ -28,7 +27,7 @@ tab3_layout = [[sg.Text('Tab 3')]]
 tab4_layout = [[sg.Text('Tab 3')]]
 
 # The TabgGroup layout - it must contain only Tabs
-tab_group_layout = [[sg.Tab('Tab 1', tab1_layout, key='-TAB1-'),
+tab_group_layout = [[sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
                      sg.Tab('Tab 2', tab2_layout, visible=False, key='-TAB2-'),
                      sg.Tab('Tab 3', tab3_layout, key='-TAB3-'),
                      sg.Tab('Tab 4', tab4_layout, visible=False, key='-TAB4-')]]
