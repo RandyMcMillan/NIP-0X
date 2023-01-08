@@ -6,11 +6,11 @@ import PySimpleGUI  as sg
 
 tab1_layout = [
 #             [sg.Text('Key Generator')],
-              [sg.Text("base_entropy")],
+              [sg.Text("base entropy")],
               [sg.Input(key='-INPUT1-')],
-              [sg.Text("password_salt")],
+              [sg.Text("password | additional entropy")],
               [sg.Input(key='-INPUT2-')],
-              [sg.Text("index")],
+              [sg.Text("index (secret integer)")],
               [sg.Input(key='-INPUT3-')],
               [sg.Text('', size=(64,1), key='-BASE-')],
               [sg.Text('', size=(64,1), key='-BASEOUTPUT-')],
