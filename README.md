@@ -1,3 +1,17 @@
+```
+git at ₿ in /Volumes/git/NIP-0X on master [!]
+$ ./NIP-0X_cli.py 00000000000000000000000000000000000000000000000000000000000000
+d99ca2cb9021700e8ed422a2213ab95b244096eeaad307dead863da2b6e88246
+
+git at ₿ in /Volumes/git/NIP-0X on master [!]
+$ printf 00000000000000000000000000000000000000000000000000000000000000 | openssl dgst -sha256
+d99ca2cb9021700e8ed422a2213ab95b244096eeaad307dead863da2b6e88246
+
+
+```
+
+
+
 # bip85 utils
 Bip85 lib and cli written in python.
 
