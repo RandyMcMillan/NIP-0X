@@ -49,7 +49,7 @@ def ShowMeTheButtons(base_entropy):
     tab1_layout = [
     #             [sg.Text('Key Generator')],
     
-                  [sg.Text("base entropy")],
+                  [sg.Text("BASE_ENTROPY")],
                   [sg.Input( size=(100,1),key='-INPUT1-')],
                   [sg.Text("password • additional entropy")],
                   [sg.Input( size=(100,1),key='-INPUT2-')],
