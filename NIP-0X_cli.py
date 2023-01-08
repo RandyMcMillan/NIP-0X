@@ -110,11 +110,11 @@ def ShowMeTheButtons():
             url = 'https://github.com/RandyMcMillan/NIP-0X'
             webbrowser.open_new_tab(url)
             webbrowser.open_new(url)
+            break
         # See if user wants to quit or window was closed
         if event == sg.WINDOW_CLOSED or event == 'Quit':
             show_qr(hashed_base_pw_idx)
             break
-
 
     # Finish up by removing from the screen
     window.close()
