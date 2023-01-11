@@ -37,52 +37,66 @@ def ShowMeTheButtons(base_entropy):
                 ['&Help', '&About...'], ]
 
     sg.set_options(auto_size_buttons=True,
-            margins=(0, 0),
-            button_color=sg.COLOR_SYSTEM_DEFAULT)
+                   margins=(0, 0), button_color=sg.COLOR_SYSTEM_DEFAULT)
 
     toolbar_buttons = [[
-        sg.Button('', image_data=close64[22:],button_color=('white', sg.COLOR_SYSTEM_DEFAULT), pad=(0,0), key='-close-'),
-        sg.Button('', image_data=github64[22:], button_color=('white', sg.COLOR_SYSTEM_DEFAULT), pad=(0, 0), key='-github-'),
+        sg.Button('', image_data=close64[22:],
+                  button_color=('white',
+                                sg.COLOR_SYSTEM_DEFAULT),
+                  pad=(0,0),  key='-close-'),
+        sg.Button('', image_data=github64[22:],
+                  button_color=('white',
+                                sg.COLOR_SYSTEM_DEFAULT),
+                  pad=(0, 0), key='-github-'),
         ]]
-        # end ShowMeTheButtons
+    # end ShowMeTheButtons
 
     tab1_layout = [
-    #             [sg.Text('Key Generator')],
-    
-                  [sg.Text("BASE_ENTROPY")],
-                  [sg.Input( size=(100,1),key='-INPUT1-')],
-                  [sg.Text("password • additional entropy")],
-                  [sg.Input( size=(100,1),key='-INPUT2-')],
-                  [sg.Text("index (secret integer • hashed as a string)")],
-                  [sg.Input( size=(100,1),key='-INPUT3-')],
-    
-                  # [sg.Text('', size=(100,1), key='-BASE-')],
-                  [sg.Text('', size=(100,1), key='-BASEOUTPUT-')],
-                  # [sg.Text('', size=(100,1), key='-BASEPW-')],
-                  [sg.Text('', size=(100,1), key='-BASEPWOUTPUT-')],
-                  # [sg.Text('', size=(100,1), key='-BASEPWIDX-')],
-                  [sg.Text('', size=(100,1), key='-BASEPWIDXOUTPUT-')],
-                  [sg.Button('Ok'), sg.Button('Quit')]
-                  ]
-    
-    tab2_layout = [[sg.Text('Tab 2')]]
-    tab3_layout = [[sg.Text('Tab 3')]]
-    tab4_layout = [[sg.Text('Tab 4')]]
+        # [sg.Text('Key Generator')],
+        [sg.Text("BASE_ENTROPY")],
+        [sg.Input(size=(100, 1), key='-INPUT1-')],
+        [sg.Text("password • additional entropy")],
+        [sg.Input(size=(100, 1), key='-INPUT2-')],
+        [sg.Text("index (secret integer • hashed as a string)")],
+        [sg.Input(size=(100, 1), key='-INPUT3-')],
+        # [sg.Text('', size=(100, 1), key='-BASE-')],
+        [sg.Text('', size=(100, 1), key='-BASEOUTPUT-')],
+        # [sg.Text('', size=(100, 1), key='-BASEPW-')],
+        [sg.Text('', size=(100, 1), key='-BASEPWOUTPUT-')],
+        # [sg.Text('', size=(100, 1), key='-BASEPWIDX-')],
+        [sg.Text('', size=(100, 1), key='-BASEPWIDXOUTPUT-')],
+        [sg.Button('Ok'), sg.Button('Quit')]
+        ]
+
+    tab2_layout = [[sg.Text('NIP ##  ')]]
+    tab3_layout = [[sg.Text('NIP ### ')]]
+    tab4_layout = [[sg.Text('NIP ####')]]
 
     # The TabgGroup layout - it must contain only Tabs
-    tab_group_layout = [[sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
-                         sg.Tab('Tab 2', tab2_layout, visible=False, key='-TAB2-'),
-                         sg.Tab('Tab 3', tab3_layout, key='-TAB3-'),
-                         sg.Tab('Tab 4', tab4_layout, visible=False, key='-TAB4-')]]
-                        
-    
+    tab_group_layout = [
+        [
+            sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
+            sg.Tab('NIP ##  ', tab2_layout, visible=True, key='-TAB2-'),
+            sg.Tab('NIP ### ', tab3_layout, visible=True, key='-TAB3-'),
+            sg.Tab('NIP ####', tab4_layout, visible=True, key='-TAB4-')
+        ]
+    ]
+
     # The window layout - defines the entire window
     layout = [
              [sg.Menu(menu_def, )],
-             [sg.Frame('', toolbar_buttons, title_color='white', background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
-#             [sg.Text('', size=(100, 0))],
-             [sg.TabGroup(tab_group_layout, enable_events=True, key='-TABGROUP-')],
-             [sg.Text('Status Bar', relief=sg.RELIEF_SUNKEN, size=(100, 1), pad=(3, 3), key='-status-')]
+             [sg.Frame('', toolbar_buttons,
+                       title_color='white',
+                       background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
+#            [sg.Text('', size=(100, 0))],
+             [sg.TabGroup(tab_group_layout,
+                          enable_events=True,
+                          key='-TABGROUP-')],
+             [sg.Text('Status Bar',
+                      relief=sg.RELIEF_SUNKEN,
+                      size=(100, 1),
+                      pad=(3, 3),
+                      key='-status-')]
              ]
 
     # Create the window
@@ -90,77 +104,87 @@ def ShowMeTheButtons(base_entropy):
 
     # Display and interact with the Window using an Event Loop
     while True:
+
         event, values = window.Read()
-        hashed_base = hashlib.sha256( \
-        str(values['-INPUT1-']).encode('utf-8')).hexdigest()
+        hashed_base = hashlib.sha256(
+            str(values['-INPUT1-']).encode('utf-8')).hexdigest()
         # window['-OUTPUT1-'].update('base_entropy:' + values['-INPUT1-'] + "")
+        print(hashed_base)
         window['-BASEOUTPUT-'].update(hashed_base)
-    
-        hashed_base_pw = hashlib.sha256( \
-        str(values['-INPUT1-']).encode('utf-8') \
-        +str(values['-INPUT2-']).encode('utf-8')).hexdigest()
+
+        event, values = window.Read()
+        hashed_base_pw = hashlib.sha256(
+            str(values['-INPUT1-']).encode('utf-8')
+            + str(values['-INPUT2-']).encode('utf-8')).hexdigest()
         window['-BASEPWOUTPUT-'].update(hashed_base_pw)
-    
-        hashed_base_pw_idx = hashlib.sha256( \
-        str(values['-INPUT1-']).encode('utf-8') \
-        +str(values['-INPUT2-']).encode('utf-8') \
-        +str(values['-INPUT3-']).encode('utf-8')).hexdigest()
+
+        event, values = window.Read()
+        hashed_base_pw_idx = hashlib.sha256(
+            str(values['-INPUT1-']).encode('utf-8')
+            + str(values['-INPUT2-']).encode('utf-8')
+            + str(values['-INPUT3-']).encode('utf-8')).hexdigest()
         window['-BASEPWIDXOUTPUT-'].update(hashed_base_pw_idx)
 
         button, value = window.read()
         print(button)
         if button in ('-close-', 'Exit') or button is None:
             # break       # exit button clicked
+            window.close()
             exit()
+        print(button)
         if button == '-github-':
             url = 'https://github.com/RandyMcMillan/NIP-0X'
             webbrowser.open_new_tab(url)
             webbrowser.open_new(url)
             break
         # See if user wants to quit or window was closed
+        print(button)
         if event == sg.WINDOW_CLOSED or event == 'Quit':
-            show_qr(hashed_base_pw_idx)
+            # show_qr(hashed_base_pw_idx, window)
             break
+            # Finish up by removing from the screen
+            window.close()
+            exit()
 
-    # Finish up by removing from the screen
-    window.close()
 
 def main_cli(command):
     print('main_cli')
     print(f'main_cli: command={command}')
-    #end main_cli
+    # end main_cli
 
 
 def main_gui(argv):
     # filename = sg.popup_get_file('Please enter a filename:')
-#    main_cli(argv)
+    # main_cli(argv)
     ShowMeTheButtons(argv)
-    #end main_gui
+    # end main_gui
+
 
 parser = argparse.ArgumentParser(
-                    prog = 'NIP-0x_cli',
-                    description = 'nostr python3 cli',
-                    epilog = 'NOSTR is AWESOME!')
+                    prog='NIP-0x_cli',
+                    description='nostr python3 cli',
+                    epilog='NOSTR is AWESOME!')
 subparsers = parser.add_subparsers()
-#parser.add_argument('integers', metavar='N', type=int, nargs='+',
+# parser.add_argument('integers', metavar='N', type=int, nargs='+',
 #                    help='an integer for the accumulator')
-#parser.add_argument('--sum', dest='accumulate', action='store_const',
+# parser.add_argument('--sum', dest='accumulate', action='store_const',
 #                    const=sum, default=max,
 #                    help='sum the integers (default: find the max)')
-#parser.add_argument('--sum2', dest='accumulate2', action='store_const',
+# parser.add_argument('--sum2', dest='accumulate2', action='store_const',
 #                    const=sum, default=max,
 #                    help='sum2 the integers (default: find the max)')
-parser.add_argument('-b','--base', dest='base_entropy', type=str,
-                    default='', help='Your source of entropy type=str BASE_ENTROPY')
-                    # end parser
-parser.add_argument('-pw','--password', dest='password', type=str,
-                    default='', help='Addtional entropy type=str (BASE_ENTROPY+PASSWORD)')
-                    # end parser
-parser.add_argument('-i','--index', dest='index', type=int,
-                    default='0', help='Deterministic entropy type=int (BASE_ENTROPY+PASSWORD+INDEX)')
-                    # end parser
-parser.add_argument('-g','--gui', dest='gui', action='store_true',
-                    default=False, help='Present GUI ')
+parser.add_argument('-b', '--base',
+                    dest='base_entropy', type=str, default='',
+                    help='Your source of entropy type=str BASE_ENTROPY')
+parser.add_argument('-pw','--password',
+                    dest='password', type=str, default='',
+                    help='Addtional entropy type=str (BASE_ENTROPY+PASSWORD)')
+parser.add_argument('-i','--index',
+                    dest='index', type=int, default='0',
+                    help='Deterministic entropy type=int (BASE_ENTROPY+PASSWORD+INDEX)')
+parser.add_argument('-g','--gui',
+                    dest='gui', action='store_true', default=False,
+                    help='Present GUI ')
                     # end parser
 args = parser.parse_args()
 #print(f"test {args.integers}",args.accumulate(args.integers))
