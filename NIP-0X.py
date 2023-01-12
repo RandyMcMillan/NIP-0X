@@ -35,6 +35,7 @@ def save_qr(hashed_base_pw_idx, window):
     # end show_qr
 
 
+# ------ BEGIN GUI Definition ------ #
 # ------ Menu Definition ------ #
 menu_def = [['&File', ['&Open', '&Save', '&Properties', 'E&xit']],
             ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
@@ -98,7 +99,7 @@ layout = [
          [sg.Frame('', toolbar_buttons,
                    title_color='white',
                    background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
-#            [sg.Text('', size=(100, 0))],
+    # [sg.Text('', size=(100, 0))],
          [sg.TabGroup(tab_group_layout,
                       enable_events=True,
                       key='-TABGROUP-')],
@@ -111,8 +112,10 @@ layout = [
 
 # Create the window
 window = sg.Window('NIP-0X', layout)
+# ------ END GUI Definition ------ #
 
-def ShowMeTheButtons(base_entropy):
+
+def gui_loop(base_entropy):
     # Display and interact with the Window using an Event Loop
     while True:
 
@@ -174,7 +177,7 @@ def main_cli(command):
 def main_gui(argv):
     # filename = sg.popup_get_file('Please enter a filename:')
     # main_cli(argv)
-    ShowMeTheButtons(argv)
+    gui_loop(argv)
     # end main_gui
 
 
@@ -212,7 +215,7 @@ args = parser.parse_args()
 # print(f"test {args.integers}",args.accumulate(args.integers))
 # print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
 args = parser.parse_args()
-print(vars(args))
+# print(vars(args))
 
 if __name__ == '__main__':
 
@@ -228,6 +231,8 @@ if __name__ == '__main__':
         main_cli('')
         # end < 2
     # last
+    if not args.gui:
+        print(args.gui)
     if args.gui:
         print(args.gui)
         main_gui(sys.argv)
