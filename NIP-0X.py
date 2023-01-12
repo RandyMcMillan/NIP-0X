@@ -227,6 +227,9 @@ if __name__ == '__main__':
     if len(sys.argv) >= 2 and len(sys.argv) < 5:
         if sys.argv[1] == "-g" or sys.argv[1] == "--gui":
             main_gui(sys.argv)
+        if sys.argv[1] == "-b" or sys.argv[1] == "--base":
+            BASE_ENTROPY = sys.argv[2]
+            main_cli(sys.argv)
         # end >= 2
     else:
         main_cli(sys.argv)
