@@ -200,29 +200,33 @@ subparsers = parser.add_subparsers()
 parser.add_argument('-b', '--base',
                     dest='base_entropy', type=str, default='',
                     help='Your source of entropy type=str BASE_ENTROPY')
-parser.add_argument('-pw','--password',
+parser.add_argument('-pw', '--password',
                     dest='password', type=str, default='',
                     help='Addtional entropy type=str (BASE_ENTROPY+PASSWORD)')
-parser.add_argument('-i','--index',
+parser.add_argument('-i', '--index',
                     dest='index', type=int, default='0',
-                    help='Deterministic entropy type=int (BASE_ENTROPY+PASSWORD+INDEX)')
-parser.add_argument('-g','--gui',
+                    help='Deterministic entropy \
+                    type=str (BASE_ENTROPY+PASSWORD+INDEX)')
+parser.add_argument('-g', '--gui',
                     dest='gui', action='store_true', default=False,
                     help='Present GUI ')
-                    # end parser
+# end parser
 args = parser.parse_args()
-#print(f"test {args.integers}",args.accumulate(args.integers))
-#print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
+# print(f"test {args.integers}",args.accumulate(args.integers))
+# print(f"args.accumulate(args.integers):",args.accumulate(args.integers))
 args = parser.parse_args()
 print(vars(args))
 
 if __name__ == '__main__':
-    print(len(sys.argv))
+
+    # print(f"{len(sys.argv)}", len(sys.argv))
+    print(f"{len(sys.argv)}", len(sys.argv))
     if len(sys.argv) < 2:
-        main_gui('')
+        main_cli('')
         # end < 2
     if len(sys.argv) >= 2 and len(sys.argv) < 5:
-        main_gui(sys.argv)
+        if sys.argv[1] == "-g":
+            main_gui(sys.argv)
         # end >= 2
     else:
         main_cli(sys.argv)
