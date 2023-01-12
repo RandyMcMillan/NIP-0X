@@ -225,7 +225,7 @@ if __name__ == '__main__':
         main_cli('')
         # end < 2
     if len(sys.argv) >= 2 and len(sys.argv) < 5:
-        if sys.argv[1] == "-g":
+        if sys.argv[1] == "-g" or sys.argv[1] == "--gui":
             main_gui(sys.argv)
         # end >= 2
     else:
