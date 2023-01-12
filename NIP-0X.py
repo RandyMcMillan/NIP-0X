@@ -35,90 +35,84 @@ def save_qr(hashed_base_pw_idx, window):
     # end show_qr
 
 
-def ShowMeTheButtons(base_entropy):
+# ------ Menu Definition ------ #
+menu_def = [['&File', ['&Open', '&Save', '&Properties', 'E&xit']],
+            ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
+            ['&Toolbar', ['---', 'Command &1', 'Command &2',
+                          '---', 'Command &3', 'Command &4']],
+            ['&Help', '&About...'], ]
 
-    if len(base_entropy) > 0:
-        print(base_entropy)
-    else:
-        base_entropy = ""
+sg.set_options(auto_size_buttons=True,
+               margins=(0, 0), button_color=sg.COLOR_SYSTEM_DEFAULT)
 
-    # ------ Menu Definition ------ #
-    menu_def = [['&File', ['&Open', '&Save', '&Properties', 'E&xit']],
-                ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
-                ['&Toolbar', ['---', 'Command &1', 'Command &2',
-                              '---', 'Command &3', 'Command &4']],
-                ['&Help', '&About...'], ]
+toolbar_buttons = [[
+    sg.Button('', image_data=close64[22:],
+              button_color=('white',
+                            sg.COLOR_SYSTEM_DEFAULT),
+              pad=(0, 0),  key='-close-'),
+    sg.Button('', image_data=github64[22:],
+              button_color=('white',
+                            sg.COLOR_SYSTEM_DEFAULT),
+              pad=(0, 0), key='-github-'),
+    sg.Button('', image_data=storage64[22:],
+              button_color=('white',
+                            sg.COLOR_SYSTEM_DEFAULT),
+              pad=(0, 0), key='-storage-'),
+    ]]
+# end ShowMeTheButtons
 
-    sg.set_options(auto_size_buttons=True,
-                   margins=(0, 0), button_color=sg.COLOR_SYSTEM_DEFAULT)
-
-    toolbar_buttons = [[
-        sg.Button('', image_data=close64[22:],
-                  button_color=('white',
-                                sg.COLOR_SYSTEM_DEFAULT),
-                  pad=(0, 0),  key='-close-'),
-        sg.Button('', image_data=github64[22:],
-                  button_color=('white',
-                                sg.COLOR_SYSTEM_DEFAULT),
-                  pad=(0, 0), key='-github-'),
-        sg.Button('', image_data=storage64[22:],
-                  button_color=('white',
-                                sg.COLOR_SYSTEM_DEFAULT),
-                  pad=(0, 0), key='-storage-'),
-        ]]
-    # end ShowMeTheButtons
-
-    tab1_layout = [
-        # [sg.Text('Key Generator')],
-        [sg.Text("BASE_ENTROPY")],
-        [sg.Input(size=(100, 1), key='-INPUT1-')],
-        [sg.Text("password • additional entropy")],
-        [sg.Input(size=(100, 1), key='-INPUT2-')],
-        [sg.Text("index (secret integer • hashed as a string)")],
-        [sg.Input(size=(100, 1), key='-INPUT3-')],
-        # [sg.Text('', size=(100, 1), key='-BASE-')],
-        [sg.Text('', size=(100, 1), key='-BASEOUTPUT-')],
-        # [sg.Text('', size=(100, 1), key='-BASEPW-')],
-        [sg.Text('', size=(100, 1), key='-BASEPWOUTPUT-')],
-        # [sg.Text('', size=(100, 1), key='-BASEPWIDX-')],
-        [sg.Text('', size=(100, 1), key='-BASEPWIDXOUTPUT-')],
-        [sg.Button('Ok'), sg.Button('Quit')]
-        ]
-
-    tab2_layout = [[sg.Text('NIP ##  ')]]
-    tab3_layout = [[sg.Text('NIP ### ')]]
-    tab4_layout = [[sg.Text('NIP ####')]]
-
-    # The TabgGroup layout - it must contain only Tabs
-    tab_group_layout = [
-        [
-            sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
-            sg.Tab('NIP ##  ', tab2_layout, visible=True, key='-TAB2-'),
-            sg.Tab('NIP ### ', tab3_layout, visible=True, key='-TAB3-'),
-            sg.Tab('NIP ####', tab4_layout, visible=True, key='-TAB4-')
-        ]
+tab1_layout = [
+    # [sg.Text('Key Generator')],
+    [sg.Text("BASE_ENTROPY")],
+    [sg.Input(size=(100, 1), key='-INPUT1-')],
+    [sg.Text("password • additional entropy")],
+    [sg.Input(size=(100, 1), key='-INPUT2-')],
+    [sg.Text("index (secret integer • hashed as a string)")],
+    [sg.Input(size=(100, 1), key='-INPUT3-')],
+    # [sg.Text('', size=(100, 1), key='-BASE-')],
+    [sg.Text('', size=(100, 1), key='-BASEOUTPUT-')],
+    # [sg.Text('', size=(100, 1), key='-BASEPW-')],
+    [sg.Text('', size=(100, 1), key='-BASEPWOUTPUT-')],
+    # [sg.Text('', size=(100, 1), key='-BASEPWIDX-')],
+    [sg.Text('', size=(100, 1), key='-BASEPWIDXOUTPUT-')],
+    [sg.Button('Ok'), sg.Button('Quit')]
     ]
 
-    # The window layout - defines the entire window
-    layout = [
-             [sg.Menu(menu_def, )],
-             [sg.Frame('', toolbar_buttons,
-                       title_color='white',
-                       background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
+tab2_layout = [[sg.Text('NIP ##  ')]]
+tab3_layout = [[sg.Text('NIP ### ')]]
+tab4_layout = [[sg.Text('NIP ####')]]
+
+# The TabgGroup layout - it must contain only Tabs
+tab_group_layout = [
+    [
+        sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
+        sg.Tab('NIP ##  ', tab2_layout, visible=True, key='-TAB2-'),
+        sg.Tab('NIP ### ', tab3_layout, visible=True, key='-TAB3-'),
+        sg.Tab('NIP ####', tab4_layout, visible=True, key='-TAB4-')
+    ]
+]
+
+# The window layout - defines the entire window
+layout = [
+         [sg.Menu(menu_def, )],
+         [sg.Frame('', toolbar_buttons,
+                   title_color='white',
+                   background_color=sg.COLOR_SYSTEM_DEFAULT, pad=(3, 3))],
 #            [sg.Text('', size=(100, 0))],
-             [sg.TabGroup(tab_group_layout,
-                          enable_events=True,
-                          key='-TABGROUP-')],
-             [sg.Text('Status Bar',
-                      relief=sg.RELIEF_SUNKEN,
-                      size=(100, 1),
-                      pad=(3, 3),
-                      key='-status-')]
-             ]
+         [sg.TabGroup(tab_group_layout,
+                      enable_events=True,
+                      key='-TABGROUP-')],
+         [sg.Text('Status Bar',
+                  relief=sg.RELIEF_SUNKEN,
+                  size=(100, 1),
+                  pad=(3, 3),
+                  key='-status-')]
+         ]
 
-    # Create the window
-    window = sg.Window('NIP-0X', layout)
+# Create the window
+window = sg.Window('NIP-0X', layout)
 
+def ShowMeTheButtons(base_entropy):
     # Display and interact with the Window using an Event Loop
     while True:
 
@@ -199,9 +193,12 @@ subparsers = parser.add_subparsers()
 #                    help='sum2 the integers (default: find the max)')
 parser.add_argument('-g', '--gui',
                     dest='gui', action='store_true', default=False,
+                    required=False,
                     help='Present GUI ')
 parser.add_argument('-b', '--base',
-                    dest='base_entropy', type=str, default='',
+                    dest='base_entropy',
+                    type=str,
+                    default='',
                     help='Your source of entropy type=str BASE_ENTROPY')
 parser.add_argument('-pw', '--password',
                     dest='password', type=str, default='',
@@ -220,10 +217,20 @@ print(vars(args))
 if __name__ == '__main__':
 
     # print(f"{len(sys.argv)}", len(sys.argv))
+    if args.base_entropy:
+        print(args.base_entropy)
+    if args.password:
+        print(args.password)
+    if args.index:
+        print(args.index)
     print(f"{len(sys.argv)}", len(sys.argv))
     if len(sys.argv) < 2:
         main_cli('')
         # end < 2
+    # last
+    if args.gui:
+        print(args.gui)
+        main_gui(sys.argv)
     if len(sys.argv) >= 2 and len(sys.argv) < 5:
         if sys.argv[1] == "-g" or sys.argv[1] == "--gui":
             main_gui(sys.argv)
