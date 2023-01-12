@@ -197,6 +197,9 @@ subparsers = parser.add_subparsers()
 # parser.add_argument('--sum2', dest='accumulate2', action='store_const',
 #                    const=sum, default=max,
 #                    help='sum2 the integers (default: find the max)')
+parser.add_argument('-g', '--gui',
+                    dest='gui', action='store_true', default=False,
+                    help='Present GUI ')
 parser.add_argument('-b', '--base',
                     dest='base_entropy', type=str, default='',
                     help='Your source of entropy type=str BASE_ENTROPY')
@@ -207,9 +210,6 @@ parser.add_argument('-i', '--index',
                     dest='index', type=int, default='0',
                     help='Deterministic entropy \
                     type=str (BASE_ENTROPY+PASSWORD+INDEX)')
-parser.add_argument('-g', '--gui',
-                    dest='gui', action='store_true', default=False,
-                    help='Present GUI ')
 # end parser
 args = parser.parse_args()
 # print(f"test {args.integers}",args.accumulate(args.integers))
