@@ -115,18 +115,25 @@ window = sg.Window('NIP-0X', layout)
 # ------ END GUI Definition ------ #
 
 
-def gui_loop(base_entropy):
+def gui_loop(args):
+
+#    window = sg.Window('NIP-0X', layout)
+    event, values = window.Read()
+    print(f"args.base_entropy: hashed_base={args.base_entropy}")
+    window['-INPUT1-'].update(args.base_entropy)
     # Display and interact with the Window using an Event Loop
     while True:
 
-        event, values = window.Read()
         hashed_base = hashlib.sha256(
             str(values['-INPUT1-']).encode('utf-8')).hexdigest()
-        # window['-OUTPUT1-'].update('base_entropy:' + values['-INPUT1-'] + "")
-        print(hashed_base)
-        window['-BASEOUTPUT-'].update(hashed_base)
 
-        event, values = window.Read()
+        print(f"gui_loop: hashed_base={hashed_base}")
+        window['-INPUT1-'].update(args.base_entropy)
+        # window['-BASEOUTPUT-'].update(BASE_ENTROPY)
+        # window['-BASEOUTPUT-'].update('base_entropy:' + values['-INPUT1-'] + "")
+        # window['-INPUT1-'].update(args.base_entropy)
+
+        # event, values = window.Read()
         hashed_base_pw = hashlib.sha256(
             str(values['-INPUT1-']).encode('utf-8')
             + str(values['-INPUT2-']).encode('utf-8')).hexdigest()
@@ -168,15 +175,16 @@ def gui_loop(base_entropy):
             exit()
 
 
-def main_cli(command):
+def main_cli(argv):
     print('main_cli')
-    print(f'main_cli: command={command}')
+    print(f'main_cli: command={argv}')
     # end main_cli
 
 
 def main_gui(argv):
     # filename = sg.popup_get_file('Please enter a filename:')
     # main_cli(argv)
+    print(f'main_gui: command={argv}')
     gui_loop(argv)
     # end main_gui
 
@@ -228,14 +236,14 @@ if __name__ == '__main__':
         print(args.index)
     print(f"{len(sys.argv)}", len(sys.argv))
     if len(sys.argv) < 2:
-        main_cli('')
+        main_cli(args)
         # end < 2
     # last
     if not args.gui:
         print(args.gui)
     if args.gui:
         print(args.gui)
-        main_gui(sys.argv)
+        main_gui(args)
     if len(sys.argv) >= 2 and len(sys.argv) < 5:
         if sys.argv[1] == "-g" or sys.argv[1] == "--gui":
             main_gui(sys.argv)
