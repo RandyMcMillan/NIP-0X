@@ -294,8 +294,8 @@ submodules:## 	git submodule update --init --recursive
 abandon-art:## 	unsecure demonstration seed
 
 ifneq ($(index),)
-	@$(shell if $(shell [ $(index) -ge 2147483648 ] && echo "2147483647") && $(eval BAR := false))
-
+	@$(shell if [ "$(index)" -le "2147483647" ] && echo || echo "$(shell make help)")
+	@echo $(INDEX)
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS) -i $(INDEX)
 else
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
