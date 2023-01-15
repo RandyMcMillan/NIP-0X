@@ -78,6 +78,7 @@ INDEX:=$(index)
 else
 INDEX:=0
 endif
+INDEX_LIMIT:=2147483647
 export INDEX
 
 PROJECT_NAME							:= $(notdir $(PWD))
@@ -204,6 +205,7 @@ help:## 	print verbose help
 	echo 'submodules      	git submodule update --init --recursive'
 	echo 'abandon-art     	unsecure demonstration seed (default 12)'
 	### :make abandon-art words=24
+	### :make abandon-art words=24 index=2147483647
 	### :make privkey mnemonic="<string> ... <string>"
 	echo ''
 	sed -n 's/^	### ://p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
@@ -232,6 +234,8 @@ report:## 	print environment arguments
 	@echo ''
 	@echo '        - BIP85_CLI=${BIP85_CLI}'
 	@echo '        - WORDS=${WORDS}'
+	@echo '        - INDEX=${INDEX}'
+	@echo '        - INDEX_LIMIT=${INDEX_LIMIT}'
 	@echo ''
 	@echo '        - TIME=${TIME}'
 	@echo '        - ARCH=${ARCH}'
@@ -294,9 +298,9 @@ submodules:## 	git submodule update --init --recursive
 abandon-art:## 	unsecure demonstration seed
 
 ifneq ($(index),)
-	@$(shell if [ "$(index)" -le "2147483647" ] && echo || echo "$(shell make help)")
-	@echo $(INDEX)
-	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS) -i $(INDEX)
+	@[ "$(index)" -le "$(INDEX_LIMIT)" ] && \
+		bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" \
+		-w $(WORDS) -i $(INDEX) || echo 'make help';exit;
 else
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
 endif
