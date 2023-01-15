@@ -66,6 +66,11 @@ else
 WORDS:=$(words)
 endif
 
+ifneq ($(mnemonic),)
+MNEMONIC:=$(mnemonic)
+export MNEMONIC
+endif
+
 
 PROJECT_NAME							:= $(notdir $(PWD))
 export PROJECT_NAME
@@ -285,5 +290,6 @@ initialize:## 	install libs and dependencies
 submodules:## 	git submodule update --init --recursive
 	@git submodule update --init --recursive
 abandon-art:## 	unsecure demonstration seed 
-abandon-art:## 	usage: make abandon-art words=24 (default: 12)
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
+privkey:## 	generate privkey from mnemonic
+	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS)
