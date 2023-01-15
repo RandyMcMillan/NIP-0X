@@ -187,23 +187,16 @@ help:## 	print verbose help
 	echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
 	echo ''
 	echo 'help            	print verbose help'
-	### :help verbose
 	echo 'report          	print environment arguments'
-	### :report verbose
 	echo 'all             	init venv'
-	### :all verbose
 	echo 'venv            	create python3 virtualenv .venv'
-	### :venv verbose
 	echo 'venv-test       	test virutalenv .venv'
-	### :venv-test verbose
 	echo 'init            	basic setup'
-	### :init verbose
 	echo 'initialize      	install libs and dependencies'
-	### :initialize verbose
 	echo 'submodules      	git submodule update --init --recursive'
-	### :submodules verbose
 	echo 'abandon-art     	unsecure demonstration seed'
-	### :make abandon-art words=24 (default: 12)
+	### :make abandon-art words=24 (default 12)
+	### :make privkey mnemonic="<string> ... <string>"
 	echo ''
 	sed -n 's/^	### ://p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
 
@@ -292,4 +285,4 @@ submodules:## 	git submodule update --init --recursive
 abandon-art:## 	unsecure demonstration seed 
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
 privkey:## 	generate privkey from mnemonic
-	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS)
+	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) || $(MAKE) help
