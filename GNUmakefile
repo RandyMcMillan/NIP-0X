@@ -69,9 +69,16 @@ endif
 
 ifneq ($(mnemonic),)
 MNEMONIC:=$(mnemonic)
-export MNEMONIC
 endif
+export MNEMONIC
 
+##REF: https://en.wikipedia.org/wiki/2,147,483,647
+ifneq ($(index),)
+INDEX:=$(index)
+else
+INDEX:=0
+endif
+export INDEX
 
 PROJECT_NAME							:= $(notdir $(PWD))
 export PROJECT_NAME
@@ -284,7 +291,14 @@ initialize:## 	install libs and dependencies
 
 submodules:## 	git submodule update --init --recursive
 	@git submodule update --init --recursive
-abandon-art:## 	unsecure demonstration seed 
+abandon-art:## 	unsecure demonstration seed
+
+ifneq ($(index),)
+	@$(shell if $(shell [ $(index) -ge 2147483648 ] && echo "2147483647") && $(eval BAR := false))
+
+	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS) -i $(INDEX)
+else
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
+endif
 privkey:## 	generate privkey from mnemonic
 	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
