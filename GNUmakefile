@@ -175,27 +175,37 @@ export PACKAGE_PREFIX
 -:
 	#NOTE: 2 hashes are detected as 1st column output with color
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	#sed -n 's/^###//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^//'
 
 .PHONY: help
 help:## 	print verbose help
 	echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
 	echo ''
 	echo 'help            	print verbose help'
+	### :help verbose
 	echo 'report          	print environment arguments'
+	### :report verbose
 	echo 'all             	init venv'
+	### :all verbose
 	echo 'venv            	create python3 virtualenv .venv'
+	### :venv verbose
 	echo 'venv-test       	test virutalenv .venv'
+	### :venv-test verbose
 	echo 'init            	basic setup'
+	### :init verbose
 	echo 'initialize      	install libs and dependencies'
+	### :initialize verbose
 	echo 'submodules      	git submodule update --init --recursive'
+	### :submodules verbose
 	echo 'abandon-art     	unsecure demonstration seed'
-	echo 'abandon-art     	usage: make abandon-art words=24 (default: 12)'
+	### :make abandon-art words=24 (default: 12)
 	echo ''
-	sed -n 's/^###//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^//'
+	sed -n 's/^	### ://p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
 
 ### test
 .PHONY: report
 report:## 	print environment arguments
+### verbose report
 	@echo ''
 	@echo '	[ARGUMENTS]	'
 	@echo '      args:'
