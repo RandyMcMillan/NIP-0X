@@ -169,18 +169,6 @@ CMD_ARGUMENTS							:= $(cmd)
 endif
 export CMD_ARGUMENTS
 
-#ifeq ($(umbrel),true)
-##comply with umbrel conventions
-#PWD=/home/umbrel/umbrel/apps/$(PROJECT_NAME)
-#UMBREL=true
-#else
-#pwd ?= pwd_unknown
-#UMBREL=false
-#endif
-#export PWD
-#export UMBREL
-########################
-
 PACKAGE_PREFIX                          := ghcr.io
 export PACKAGE_PREFIX
 .PHONY: - all
@@ -190,24 +178,22 @@ export PACKAGE_PREFIX
 
 .PHONY: help
 help:## 	print verbose help
-	@echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
-	@echo ''
-	#@echo ''
-	@echo `help            	print verbose help`
-	@echo `report          	print environment arguments`
-	@echo `all             	init venv`
-	@echo `venv            	create python3 virtualenv .venv`
-	@echo `venv-test       	test virutalenv .venv`
-	@echo `init            	basic setup`
-	@echo `initialize      	install libs and dependencies`
-	@echo `submodules      	git submodule update --init --recursive`
-	@echo `abandon-art     	unsecure demonstration seed`
-	@echo `abandon-art     	usage: make abandon-art words=24 (default: 12)`
-	@echo ''
-	@sed -n 's/^# //p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/# /'
-	@sed -n 's/^## //p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/## /'
-	@sed -n 's/^### //p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/### /'
+	echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
+	echo ''
+	echo 'help            	print verbose help'
+	echo 'report          	print environment arguments'
+	echo 'all             	init venv'
+	echo 'venv            	create python3 virtualenv .venv'
+	echo 'venv-test       	test virutalenv .venv'
+	echo 'init            	basic setup'
+	echo 'initialize      	install libs and dependencies'
+	echo 'submodules      	git submodule update --init --recursive'
+	echo 'abandon-art     	unsecure demonstration seed'
+	echo 'abandon-art     	usage: make abandon-art words=24 (default: 12)'
+	echo ''
+	sed -n 's/^###//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^//'
 
+### test
 .PHONY: report
 report:## 	print environment arguments
 	@echo ''
@@ -257,7 +243,7 @@ venv:## 	create python3 virtualenv .venv
 	@echo ". .venv/bin/activate"
 	@echo "or:"
 	@echo "make venv-test"
-##:	venv-test            source .venv/bin/activate; pip install -r requirements.txt;
+##:venv-test            source .venv/bin/activate; pip install -r requirements.txt;
 venv-test:## 	test virutalenv .venv
 	# insert test commands here
 	test -d .venv || $(PYTHON3) -m virtualenv .venv
