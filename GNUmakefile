@@ -58,6 +58,7 @@ export python_version_minor
 export python_version_patch
 export PYTHON_VERSION
 
+### BIP85
 BIP85_CLI:=$(shell command -v bip85-cli)
 export BIP85_CLI
 ifeq ($(words),)
@@ -194,11 +195,12 @@ help:## 	print verbose help
 	echo 'init            	basic setup'
 	echo 'initialize      	install libs and dependencies'
 	echo 'submodules      	git submodule update --init --recursive'
-	echo 'abandon-art     	unsecure demonstration seed'
-	### :make abandon-art words=24 (default 12)
+	echo 'abandon-art     	unsecure demonstration seed (default 12)'
+	### :make abandon-art words=24
 	### :make privkey mnemonic="<string> ... <string>"
 	echo ''
 	sed -n 's/^	### ://p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
+	#sed -n 's/^	###//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
 
 ### test
 .PHONY: report
@@ -285,4 +287,4 @@ submodules:## 	git submodule update --init --recursive
 abandon-art:## 	unsecure demonstration seed 
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
 privkey:## 	generate privkey from mnemonic
-	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) || $(MAKE) help
+	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
