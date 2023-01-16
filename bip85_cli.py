@@ -5,17 +5,17 @@ from bip85lib.bip85 import Bip85
 from colorama import init
 from termcolor import colored
 BANNER = """
-bb      iii          88888  555555                lll iii 
-bb          pp pp   88   88 55               cccc lll 
-bbbbbb  iii ppp  pp  88888  555555  _____  cc     lll iii 
-bb   bb iii pppppp  88   88    5555        cc     lll iii 
-bbbbbb  iii pp       88888  555555          ccccc lll iii 
+bb      iii          88888  555555                lll iii
+bb          pp pp   88   88 55               cccc lll
+bbbbbb  iii ppp  pp  88888  555555  _____  cc     lll iii
+bb   bb iii pppppp  88   88    5555        cc     lll iii
+bbbbbb  iii pp       88888  555555          ccccc lll iii
             pp """
 VERSION = '0.0.1'
 
 def main():
-    print(colored(BANNER, 'green'))
-    print(colored(f'      bip85-cli version {VERSION}', 'green'))
+    # print(colored(BANNER, 'green'))
+    # print(colored(f'      bip85-cli version {VERSION}', 'green'))
 
     parser = argparse.ArgumentParser(description='BIP85 utils')
     parser.add_argument('--master-key', help='Master key')
@@ -51,9 +51,9 @@ def main():
     bip85.derive_bip39(args.words, args.index)
     bip85.get_mnemonic()
 
-    print(colored('Derived private key: {}'.format(bip85.priv_key.hex()), 'yellow'))
-    print(colored('Derived entropy ({}) {}'.format(len(bip85.entropy.hex()), bip85.entropy.hex()), 'yellow'))
-    print(colored('Derived mnemonic: {}'.format(bip85.derived_mnemonic), 'yellow'))
+    print(colored('Derived private key:\n{}'.format(bip85.priv_key.hex()), 'yellow'))
+    print(colored('Derived entropy ({})\n{}'.format(len(bip85.entropy.hex()), bip85.entropy.hex()), 'yellow'))
+    print(colored('Derived mnemonic:\n{}'.format(bip85.derived_mnemonic), 'yellow'))
 
 if __name__ == '__main__':
     main()
