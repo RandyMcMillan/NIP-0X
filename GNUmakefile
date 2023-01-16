@@ -195,7 +195,7 @@ export PACKAGE_PREFIX
 
 .PHONY: help
 help:## 	print verbose help
-	echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
+	echo '[COMMAND]       	[DESCRIPTION]	'
 	echo ''
 	echo 'help            	print verbose	'
 	echo 'report          	print environment arguments	'
@@ -313,6 +313,8 @@ privkey:## 	generate privkey from mnemonic
 	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
 
 docs:## 	generate MAKE.md
-	@echo "\`\`\`" > MAKE.md
-	$(MAKE) help >> MAKE.md
-	@echo "\`\`\`" >> MAKE.md
+	@cat README         > README.md
+	@echo "### MAKE"   >> README.md
+	@echo "\`\`\`sh"   >> README.md
+	$(MAKE) help       >> README.md
+	@echo "\`\`\`"     >> README.md
