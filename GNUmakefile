@@ -313,3 +313,6 @@ else
 endif
 privkey:## 	generate privkey from mnemonic
 	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
+
+docs:## 	generate MAKE.md
+	$(MAKE) help > MAKE.md
