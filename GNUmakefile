@@ -260,6 +260,7 @@ venv:## 	create python3 virtualenv .venv
 	   source .venv/bin/activate; \
 	   $(PIP3) install .; \
 	   $(PIP3) install -r requirements.txt; \
+	   $(MAKE) venv-test \
 	);
 	@echo "To activate (venv)"
 	@echo "try:"
