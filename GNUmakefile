@@ -185,6 +185,8 @@ export CMD_ARGUMENTS
 
 PACKAGE_PREFIX                          := ghcr.io
 export PACKAGE_PREFIX
+
+.SILENT:
 .PHONY: - all
 -:
 	#NOTE: 2 hashes are detected as 1st column output with color
@@ -252,7 +254,7 @@ report:## 	print environment arguments
 	@echo '        - GIT_REPO_NAME=${GIT_REPO_NAME}'
 	@echo '        - GIT_REPO_PATH=${GIT_REPO_PATH}'
 
-all: init venv## 	init venv
+all: init initialize install venv## 	init initialize install venv
 .PHONY: venv
 venv:## 	create python3 virtualenv .venv
 	test -d .venv || $(PYTHON3) -m virtualenv .venv
@@ -262,11 +264,13 @@ venv:## 	create python3 virtualenv .venv
 	   $(PIP3) install -r requirements.txt; \
 	   $(MAKE) venv-test \
 	);
+	@echo -e "\n"
 	@echo "To activate (venv)"
 	@echo "try:"
 	@echo ". .venv/bin/activate"
 	@echo "or:"
 	@echo "make venv-test"
+	@echo -e "\n"
 ##:venv-test            source .venv/bin/activate; pip install -r requirements.txt;
 venv-test:## 	test virutalenv .venv
 	# insert test commands here
@@ -278,27 +282,21 @@ venv-test:## 	test virutalenv .venv
 	   $(PYTHON3) bip85_cli.py -h; \
 	   $(PYTHON3) NIP-0X.py -h; \
 	);
-.PHONY: init
-.SILENT:
-init:initialize## 	basic setup
-
-	git config --global --add safe.directory $(PWD)
-	chown -R $(shell id -u) *                 || echo
-
-	# $(PYTHON3) -m pip install ./p2p 2>/dev/null
-	#$(PYTHON3) -m pip install --upgrade pip 2>/dev/null
-	#$(PYTHON3) -m pip install -q -r requirements.txt 2>/dev/null
-	# pushd scripts > /dev/null; for string in *; do sudo chmod -R o+rwx /usr/local/bin/$$string; done; popd  2>/dev/null || echo
 
 install:## 	install from local repo
-	$(PIP3) install .
+	$(PIP3) install -r requirements.txt
+	$(PIP3) install . 2>/dev/null
+	$(PIP3) install ./p2p 2>/dev/null
+	$(MAKE) venv
+init:
+	git config --global --add safe.directory $(PWD)
+	chown -R $(shell id -u) *                 || echo
+initialize:
+	. scripts/initialize  #>&/dev/null
+
 .PHONY:p2p
 p2p:## 	install from local repo
 	$(PYTHON3) ./p2p/setup.py install
-
-.PHONY: initialize
-initialize:## 	install libs and dependencies
-	./scripts/initialize  #>&/dev/null
 
 submodules:## 	git submodule update --init --recursive
 	@git submodule update --init --recursive
