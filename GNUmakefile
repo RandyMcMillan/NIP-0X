@@ -197,15 +197,15 @@ export PACKAGE_PREFIX
 help:## 	print verbose help
 	echo 'make [COMMAND] [EXTRA_ARGUMENTS]	'
 	echo ''
-	echo 'help            	print verbose help'
-	echo 'report          	print environment arguments'
-	echo 'all             	init venv'
-	echo 'venv            	create python3 virtualenv .venv'
-	echo 'venv-test       	test virutalenv .venv'
-	echo 'init            	basic setup'
-	echo 'initialize      	install libs and dependencies'
-	echo 'submodules      	git submodule update --init --recursive'
-	echo 'abandon-art     	unsecure demonstration seed (default 12)'
+	echo 'help            	print verbose	'
+	echo 'report          	print environment arguments	'
+	echo 'all             	init venv	'
+	echo 'venv            	create python3 virtualenv .venv	'
+	echo 'venv-test       	test virutalenv .venv	'
+	echo 'init            	basic setup	'
+	echo 'initialize      	install libs and dependencies	'
+	echo 'submodules      	git submodule update --init --recursive	'
+	echo 'abandon-art     	unsecure demonstration seed (default 12)	'
 	### :make abandon-art words=24
 	### :make abandon-art words=24 index=2147483647
 	### :make privkey mnemonic="<string> ... <string>"
@@ -313,4 +313,6 @@ privkey:## 	generate privkey from mnemonic
 	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
 
 docs:## 	generate MAKE.md
-	$(MAKE) help > MAKE.md
+	@echo "\`\`\`" > MAKE.md
+	$(MAKE) help >> MAKE.md
+	@echo "\`\`\`" >> MAKE.md
