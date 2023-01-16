@@ -86,10 +86,10 @@ tab4_layout = [[sg.Text('NIP ####')]]
 # The TabgGroup layout - it must contain only Tabs
 tab_group_layout = [
     [
-        sg.Tab('Key Gen', tab1_layout, key='-TAB1-'),
-        sg.Tab('NIP ##  ', tab2_layout, visible=True, key='-TAB2-'),
-        sg.Tab('NIP ### ', tab3_layout, visible=True, key='-TAB3-'),
-        sg.Tab('NIP ####', tab4_layout, visible=True, key='-TAB4-')
+        sg.Tab('NIP-0X', tab1_layout, key='-TAB1-'),
+        sg.Tab('BIP-0032', tab2_layout, visible=True, key='-TAB2-'),
+        sg.Tab('BIP-0085 ', tab3_layout, visible=True, key='-TAB3-'),
+        sg.Tab('NIP ####', tab4_layout, visible=False, key='-TAB4-')
     ]
 ]
 
