@@ -257,7 +257,9 @@ all: init venv## 	init venv
 venv:## 	create python3 virtualenv .venv
 	test -d .venv || $(PYTHON3) -m virtualenv .venv
 	( \
-	   source .venv/bin/activate; $(PIP3) install -r requirements.txt; \
+	   source .venv/bin/activate; \
+	   $(PIP3) install .; \
+	   $(PIP3) install -r requirements.txt; \
 	);
 	@echo "To activate (venv)"
 	@echo "try:"
@@ -269,7 +271,11 @@ venv-test:## 	test virutalenv .venv
 	# insert test commands here
 	test -d .venv || $(PYTHON3) -m virtualenv .venv
 	( \
-	   source .venv/bin/activate; $(PIP3) install -r requirements.txt; \
+	   source .venv/bin/activate; \
+	   $(PIP3) install .; \
+	   $(PIP3) install -r requirements.txt; \
+	   $(PYTHON3) bip85_cli.py -h; \
+	   $(PYTHON3) NIP-0X.py -h; \
 	);
 .PHONY: init
 .SILENT:
