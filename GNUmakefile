@@ -205,17 +205,36 @@ help:## 	print verbose help
 	echo ''
 	echo 'help            	print verbose	'
 	echo 'report          	print environment arguments	'
+	echo ''
 	echo 'all             	init venv	'
 	echo 'venv            	create python3 virtualenv .venv	'
 	echo 'venv-test       	test virutalenv .venv	'
 	echo 'init            	basic setup	'
 	echo 'initialize      	install libs and dependencies	'
 	echo 'submodules      	git submodule update --init --recursive	'
-	echo 'abandon-art     	unsecure demonstration seed (default 12)	'
-	### :make abandon-art words=24
-	### :make abandon-art words=24 index=2147483647
-	### :make privkey mnemonic="<string> ... <string>"
 	echo ''
+	echo 'privkey         	mnemonic="<bip39> ... <bip39>"	'
+	echo 'abandon-art     	unsecure demonstration seed (default 12)	'
+	echo 'awesome         	unsecure demonstration seed (default 12)	'
+	echo 'bacon           	unsecure demonstration seed (default 12)	'
+	echo ''
+	### :[BIP39]
+	### :make privkey mnemonic="<string> ... <string>"
+	### :		
+	### :		
+	### :[TEST VECTORS]
+	### :make abandon-art words=24
+	### :make abandon-art words=24 index=0
+	### :make abandon-art words=24 index=1
+	### :make abandon-art words=24 index=2147483647
+	### :make awesome     words=24
+	### :make awesome     words=24 index=0
+	### :make awesome     words=24 index=1
+	### :make awesome     words=24 index=2147483647
+	### :make bacon       words=24
+	### :make bacon       words=24 index=0
+	### :make bacon       words=24 index=1
+	### :make bacon       words=24 index=2147483647
 	sed -n 's/^	### ://p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
 	#sed -n 's/^	###//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^###/	/'
 
@@ -230,8 +249,7 @@ report:## 	print environment arguments
 	@echo '        - HOME=${HOME}'
 	@echo '        - PWD=${PWD}'
 	@echo ''
-	@echo '        - DECOLORIZE=${DECOLORIZE}'
-	@echo ''
+	#@echo '        - DECOLORIZE=${DECOLORIZE}'
 	@echo '        - PYTHON=${PYTHON}'
 	@echo '        - PYTHON2=${PYTHON2}'
 	@echo '        - PYTHON3=${PYTHON3}'
