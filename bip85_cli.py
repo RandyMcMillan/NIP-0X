@@ -31,8 +31,8 @@ def main():
     if args.mnemonic is not None:
         bip85.import_mnemonic(args.mnemonic)
         found = True
-        print(colored('Original seed:\n{}'.format(bip85.seed.hex()), 'red'))
-        print(colored('Original master key:\n{}'.format(bip85.get_priv_base58()), 'red'))
+        print('Original seed:\n{}'.format(bip85.seed.hex()))
+        print('Original master key:\n{}'.format(bip85.get_priv_base58()))
 
     if args.master_key is not None:
         bip85.import_xprv(args.master_key)
@@ -51,9 +51,9 @@ def main():
     bip85.derive_bip39(args.words, args.index)
     bip85.get_mnemonic()
 
-    print(colored('Derived private key:\n{}'.format(bip85.priv_key.hex()), 'yellow'))
-    print(colored('Derived entropy ({})\n{}'.format(len(bip85.entropy.hex()), bip85.entropy.hex()), 'yellow'))
-    print(colored('Derived mnemonic:\n{}'.format(bip85.derived_mnemonic), 'yellow'))
+    print('Derived private key:\n{}'.format(bip85.priv_key.hex()))
+    print('Derived entropy ({})\n{}'.format(len(bip85.entropy.hex()), bip85.entropy.hex()))
+    print('Derived mnemonic:\n{}'.format(bip85.derived_mnemonic))
 
 if __name__ == '__main__':
     main()
