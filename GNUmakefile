@@ -186,6 +186,12 @@ export CMD_ARGUMENTS
 PACKAGE_PREFIX                          := ghcr.io
 export PACKAGE_PREFIX
 
+SED:=$(shell which sed)
+export SED
+DECOLORIZE:="$(SED) 's/\x1B\([0-9]{1,3}(;[0-9]{1,3})*)?[mGK]//g'"
+export DECOLORIZE
+
+
 .SILENT:
 .PHONY: - all
 -:
@@ -223,6 +229,8 @@ report:## 	print environment arguments
 	@echo '        - PROJECT_NAME=${PROJECT_NAME}'
 	@echo '        - HOME=${HOME}'
 	@echo '        - PWD=${PWD}'
+	@echo ''
+	@echo '        - DECOLORIZE=${DECOLORIZE}'
 	@echo ''
 	@echo '        - PYTHON=${PYTHON}'
 	@echo '        - PYTHON2=${PYTHON2}'
@@ -309,12 +317,45 @@ ifneq ($(index),)
 else
 	@bip85-cli --mnemonic "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art" -w $(WORDS)
 endif
+# Twelve x "awesome" is 128 bits
+#Twenty-four x "bacon" is 256 bits
+awesome:## 	unsecure demonstration seed
+
+ifneq ($(index),)
+	@[ "$(index)" -le "$(INDEX_LIMIT)" ] && \
+		bip85-cli --mnemonic "awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome" -w $(WORDS) -i $(INDEX) || echo 'make help';exit;
+else
+	bip85-cli --mnemonic "awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome awesome" \
+	-w $(WORDS)
+endif
+
+bacon:## 	unsecure demonstration seed
+
+ifneq ($(index),)
+	@[ "$(index)" -le "$(INDEX_LIMIT)" ] && \
+		bip85-cli --mnemonic "bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon" -w $(WORDS) -i $(INDEX) || echo 'make help';exit;
+else
+	bip85-cli --mnemonic "bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon bacon" -w $(WORDS)
+endif
+
 privkey:## 	generate privkey from mnemonic
 	@bip85-cli --mnemonic "$(MNEMONIC)" -w $(WORDS) 2> make.log && echo -e "\n\n" && cat make.log || $(MAKE) help #&& echo -e "\n\n" && cat make.log
 
-docs:## 	generate MAKE.md
-	@cat README         > README.md
-	@echo "### MAKE"   >> README.md
-	@echo "\`\`\`sh"   >> README.md
-	$(MAKE) help       >> README.md
-	@echo "\`\`\`"     >> README.md
+.ONESHELL:
+docs:## 	generate README.md
+	@cat README          > README.md
+	@echo "### MAKE"    >> README.md
+	@echo "\`\`\`sh"    >> README.md
+	$(MAKE) help        >> README.md
+	@echo "\`\`\`"      >> README.md
+	@echo ""            >> README.md
+	@echo "\`\`\`sh"    >> README.md
+	$(MAKE) abandon-art >> README.md
+	@echo "\`\`\`"      >> README.md
+	@echo "\`\`\`sh"    >> README.md
+	$(MAKE) awesome     >> README.md
+	@echo "\`\`\`"      >> README.md
+	@echo "\`\`\`sh"    >> README.md
+	$(MAKE) bacon       >> README.md
+	@echo "\`\`\`"      >> README.md
+	bash -c "$($(DECOLORIZE) $(PWD)/README.md)"
