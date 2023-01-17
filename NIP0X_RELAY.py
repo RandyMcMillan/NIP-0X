@@ -29,11 +29,11 @@ class NIP0X_RELAY(Node):
 
     def node_disconnect_with_outbound_node(self, node):
         print(
-            "node wants to disconnect with oher outbound node: ("
+            "relay wants to disconnect with other outbound relay: ("
             + self.id
             + "): "
             + node.id
         )
 
     def node_request_to_stop(self):
-        print("node is requested to stop (" + self.id + "): ")
+        print("relay is requested to stop (" + self.id + "): ")

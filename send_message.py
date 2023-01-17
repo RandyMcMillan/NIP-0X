@@ -18,9 +18,9 @@ node_3.start()
 
 time.sleep(1)
 
-node_1.connect_with_node("wss://relay.nostrich.io", 443)
-node_2.connect_with_node("wss://relay.nostr.nu",    443)
-node_3.connect_with_node("wss://relay.damus.io",    443)
+node_1.connect_with_node("wss://relay.nostrich.io", 7000)
+node_2.connect_with_node("wss://relay.nostr.nu",    7000)
+node_3.connect_with_node("wss://relay.damus.io",    7000)
 
 time.sleep(2)
 
