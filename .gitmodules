@@ -5,6 +5,12 @@
 [submodule "aionostr"]
 	path = aionostr
 	url = git@github.com:0x20bf-org/aionostr.git
+	ignore = dirty
 [submodule "nostr_relay"]
 	path = nostr_relay
 	url = git@github.com:0x20bf-org/nostr_relay.git
+	ignore = dirty
+[submodule "bip85-utils"]
+	path = bip85-utils
+	url = git@github.com:0x20bf-org/bip85-utils.git
+	ignore = dirty
