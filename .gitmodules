@@ -2,3 +2,6 @@
 	path = p2p
 	url = git@github.com:0x20bf-org/p2p.git
 	ignore = dirty
+[submodule "aionostr"]
+	path = aionostr
+	url = git@github.com:0x20bf-org/aionostr.git
