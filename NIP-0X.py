@@ -190,7 +190,7 @@ def main_gui(argv):
 
 
 parser = argparse.ArgumentParser(
-                    prog='NIP-0x_cli',
+                    prog='NIP-0X_cli',
                     description='nostr python3 cli',
                     epilog='NOSTR is AWESOME!')
 subparsers = parser.add_subparsers()
