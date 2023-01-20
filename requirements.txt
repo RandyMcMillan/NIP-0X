@@ -17,3 +17,6 @@ cryptography
 bip85-cli
 #nostr-relay
 greenlet
+#make install all
+click>=8
+watchdog>=2.0

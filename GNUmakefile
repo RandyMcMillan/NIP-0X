@@ -227,6 +227,7 @@ help:## 	print verbose help
 	echo 'MacOS python3 bug fix:'
 	echo 'MacOS: x86_64'
 	echo 'make report init initialize install python-version=python3.10'
+	echo 'make                        install python-version=python3.10'
 	echo 'MacOS: Arm64'
 	echo 'make report init initialize install python-version=python3.9'
 	echo ''
