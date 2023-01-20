@@ -14,3 +14,7 @@
 	path = bip85-utils
 	url = git@github.com:0x20bf-org/bip85-utils.git
 	ignore = dirty
+[submodule "secp256k1-py"]
+	path = secp256k1-py
+	url = git@github.com:0x20bf-org/secp256k1-py.git
+	ignore = dirty
