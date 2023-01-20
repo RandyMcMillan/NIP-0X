@@ -313,6 +313,11 @@ install:## 	install from local repo
 	$(PIP3) install -r requirements.txt
 	$(PIP3) install . 2>/dev/null
 	$(PIP3) install ./p2p 2>/dev/null
+	$(PIP3) install ./aionostr 2>/dev/null
+	$(PIP3) install ./nostr_relay 2>/dev/null
+	$(PIP3) install -r ./aionostr/requirements_dev.txt
+	$(PIP3) install -r ./aionostr/requirements.txt
+	$(PIP3) install ./bip85-utils 2>/dev/null
 	$(MAKE) venv
 init:
 	git config --global --add safe.directory $(PWD)
