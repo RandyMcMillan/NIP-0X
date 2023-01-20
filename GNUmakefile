@@ -63,6 +63,9 @@ export PIP2
 PIP3                                    := $(shell which pip${python_version_major}.${python_version_minor})
 export PIP3
 
+NOSTR_RELAY                             := $(shell which nostr-relay)
+export NOSTR_RELAY
+
 ### BIP85
 BIP85_CLI:=$(shell command -v bip85-cli)
 export BIP85_CLI
@@ -274,6 +277,9 @@ report:## 	print environment arguments
 	# @echo '        - PIP2=${PIP2}'
 	@echo '        - PIP3=${PIP3}'
 	@echo ''
+	@echo '        - NOSTR_RELAY=${NOSTR_RELAY}'
+	@echo ''
+	@echo ''
 	@echo '        - BIP85_CLI=${BIP85_CLI}'
 	@echo '        - WORDS=${WORDS}'
 	@echo '        - INDEX=${INDEX}'
@@ -398,3 +404,4 @@ docs:## 	generate README.md
 	$(MAKE) bacon       >> README.md
 	@echo "\`\`\`"      >> README.md
 	bash -c "$($(DECOLORIZE) $(PWD)/README.md)"
+-include nostr-relay.mk
