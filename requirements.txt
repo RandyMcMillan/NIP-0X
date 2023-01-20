@@ -3,7 +3,7 @@ pyqrcode
 pypng
 #tkinter
 tk
-pyside2
+#pyside2
 WxPython
 Remi
 colorama==0.4.5
