@@ -73,6 +73,7 @@ if hash brew 2>/dev/null; then
         brew install gawk
     fi
     brew install --quiet  --force python@3
+	brew install python-tk@3.11
     if   hash pip3 2>/dev/null; then
 		pip3 install PySimpleGUI
     else
