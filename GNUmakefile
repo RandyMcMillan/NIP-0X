@@ -39,7 +39,7 @@ PYTHON3                                 := $(shell which python3.9)
 endif
 export PYTHON3
 
-python_version_full := $(wordlist 2,4,$(subst ., ,$(shell $(PYTHON3) --version 2>&1)))
+python_version_full  := $(wordlist 2,4,$(subst ., ,$(shell $(PYTHON3) --version 2>&1)))
 python_version_major := $(word 1,${python_version_full})
 python_version_minor := $(word 2,${python_version_full})
 python_version_patch := $(word 3,${python_version_full})
@@ -51,10 +51,13 @@ PYTHON_VERSION                         := ${python_version_major}.${python_versi
 PYTHON_VERSION_MAJOR                   := ${python_version_major}
 PYTHON_VERSION_MINOR                   := ${python_version_minor}
 
+export python_version_full
 export python_version_major
 export python_version_minor
 export python_version_patch
 export PYTHON_VERSION
+export PYTHON_VERSION_MAJOR
+export PYTHON_VERSION_MINOR
 
 PIP                                     := $(shell which pip)
 export PIP

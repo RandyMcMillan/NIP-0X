@@ -19,7 +19,7 @@ if [[ ! -z "$GAWK" ]]; then
     echo $AWK
 fi
 
-export PATH=$PATH:/usr/local/opt/python@${python_version_major}.${python_version_minor}/Frameworks/Python.framework/Versions/${python_version_major}.${python_version_minor}/bin
+export PATH=$PATH:/usr/local/opt/python@${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/Frameworks/Python.framework/Versions/${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/bin
 
 report() {
 echo OS:
@@ -67,22 +67,23 @@ exit
 fi
 
 if hash brew 2>/dev/null; then
-	brew install python-tk@${python_version_major}.${python_version_minor}
 	brew install openssl@3
     if ! hash gawk 2>/dev/null; then
         brew install gawk
     fi
-    brew install --quiet  --force python@${python_version_major}.${python_version_minor}
-	brew link python@${python_version_major}.${python_version_minor} pyside2
-	brew install python-tk@${python_version_major}.${python_version_minor}
-    if   hash pip${python_version_major}.${python_version_minor} 2>/dev/null; then
-		pip${python_version_major}.${python_version_minor} install PySimpleGUI
+	# echo "python@${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
+    brew install --quiet  --force python@${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}
+	# brew link python@${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}
+	# brew install python-tk@${python_version_major}.${python_version_minor}
+	# brew install python-tk@${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}
+	brew install python-tk@3.10
+    if   hash pip${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} 2>/dev/null; then
+		echo "python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
     else
-		python${python_version_major}.${python_version_minor} -m pip install PySimpleGUI
+		echo "python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}"
     fi
 
-	PYTHON3=$(command -v python${python_version_major}.${python_version_minor})
-	$PYTHON3 -m pip -q install --upgrade pip || echo
+	python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} -m pip -q install --upgrade pip || echo
     echo
 else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
