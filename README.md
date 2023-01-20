@@ -11,6 +11,15 @@ venv            	create python3 virtualenv .venv
 venv-test       	test virutalenv .venv	
 init            	basic setup	
 initialize      	install libs and dependencies	
+
+
+MacOS python3 bug fix:
+MacOS: x86_64
+make report init initialize install python-version=python3.10
+MacOS: Arm64
+make report init initialize install python-version=python3.9
+
+
 submodules      	git submodule update --init --recursive	
 
 privkey         	mnemonic="<bip39> ... <bip39>"	

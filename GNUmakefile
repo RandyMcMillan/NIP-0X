@@ -31,17 +31,15 @@ PYTHON                                  := $(shell which python)
 export PYTHON
 PYTHON2                                 := $(shell which python2)
 export PYTHON2
+
+ifneq ($(python-version),)
+PYTHON3                                 := $(python-version)
+else
 PYTHON3                                 := $(shell which python3.9)
+endif
 export PYTHON3
 
-PIP                                     := $(shell which pip)
-export PIP
-PIP2                                    := $(shell which pip2)
-export PIP2
-PIP3                                    := $(shell which pip3.9)
-export PIP3
-
-python_version_full := $(wordlist 2,4,$(subst ., ,$(shell python3.9 --version 2>&1)))
+python_version_full := $(wordlist 2,4,$(subst ., ,$(shell $(PYTHON3) --version 2>&1)))
 python_version_major := $(word 1,${python_version_full})
 python_version_minor := $(word 2,${python_version_full})
 python_version_patch := $(word 3,${python_version_full})
@@ -57,6 +55,13 @@ export python_version_major
 export python_version_minor
 export python_version_patch
 export PYTHON_VERSION
+
+PIP                                     := $(shell which pip)
+export PIP
+PIP2                                    := $(shell which pip2)
+export PIP2
+PIP3                                    := $(shell which pip${python_version_major}.${python_version_minor})
+export PIP3
 
 ### BIP85
 BIP85_CLI:=$(shell command -v bip85-cli)
@@ -211,6 +216,15 @@ help:## 	print verbose help
 	echo 'venv-test       	test virutalenv .venv	'
 	echo 'init            	basic setup	'
 	echo 'initialize      	install libs and dependencies	'
+	echo ''
+	echo ''
+	echo 'MacOS python3 bug fix:'
+	echo 'MacOS: x86_64'
+	echo 'make report init initialize install python-version=python3.10'
+	echo 'MacOS: Arm64'
+	echo 'make report init initialize install python-version=python3.9'
+	echo ''
+	echo ''
 	echo 'submodules      	git submodule update --init --recursive	'
 	echo ''
 	echo 'privkey         	mnemonic="<bip39> ... <bip39>"	'
@@ -309,7 +323,8 @@ venv-test:## 	test virutalenv .venv
 	   $(PYTHON3) NIP-0X.py -h; \
 	);
 
-install:init ## 	install from local repo
+install:init initialize## 	install from local repo
+	$(PYTHON3) get-pip.py
 	$(PYTHON3) -m pip install -r requirements.txt
 	$(PYTHON3) -m pip install ./secp256k1-py      2>/dev/null
 	$(PYTHON3) -m pip install ./p2p               2>/dev/null

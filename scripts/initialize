@@ -72,16 +72,16 @@ if hash brew 2>/dev/null; then
     if ! hash gawk 2>/dev/null; then
         brew install gawk
     fi
-    brew install --quiet  --force python@3.9
-	brew link python@3.9 pyside2
-	brew install python-tk@3.9
-    if   hash pip3 2>/dev/null; then
-		pip3 install PySimpleGUI
+    brew install --quiet  --force python@${python_version_major}.${python_version_minor}
+	brew link python@${python_version_major}.${python_version_minor} pyside2
+	brew install python-tk@${python_version_major}.${python_version_minor}
+    if   hash pip${python_version_major}.${python_version_minor} 2>/dev/null; then
+		pip${python_version_major}.${python_version_minor} install PySimpleGUI
     else
-		python3.9 -m pip install PySimpleGUI
+		python${python_version_major}.${python_version_minor} -m pip install PySimpleGUI
     fi
 
-	PYTHON3=$(command -v python3)
+	PYTHON3=$(command -v python${python_version_major}.${python_version_minor})
 	$PYTHON3 -m pip -q install --upgrade pip || echo
     echo
 else
