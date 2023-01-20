@@ -309,15 +309,15 @@ venv-test:## 	test virutalenv .venv
 	   $(PYTHON3) NIP-0X.py -h; \
 	);
 
-install:## 	install from local repo
-	$(PIP3) install -r requirements.txt
-	$(PIP3) install . 2>/dev/null
-	$(PIP3) install ./p2p 2>/dev/null
-	$(PIP3) install ./aionostr 2>/dev/null
-	$(PIP3) install ./nostr_relay 2>/dev/null
-	$(PIP3) install -r ./aionostr/requirements_dev.txt
-	$(PIP3) install -r ./aionostr/requirements.txt
-	$(PIP3) install ./bip85-utils 2>/dev/null
+install:init ## 	install from local repo
+	$(PYTHON3) -m pip install -r requirements.txt
+	$(PYTHON3) -m pip install ./p2p               2>/dev/null
+	$(PYTHON3) -m pip install ./bip85-utils       2>/dev/null
+	$(PYTHON3) -m pip install ./nostr_relay       2>/dev/null
+	$(PYTHON3) -m pip install ./aionostr          2>/dev/null
+	$(PYTHON3) -m pip install -r ./aionostr/requirements_dev.txt
+	$(PYTHON3) -m pip install -r ./aionostr/requirements.txt
+	$(PYTHON3) -m pip install . 2>/dev/null
 	$(MAKE) venv
 init:
 	git config --global --add safe.directory $(PWD)
